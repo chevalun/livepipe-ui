@@ -24,7 +24,8 @@ var HotKey = Class.create({
             altKey: false,
             ctrlKey: true,
             bubbleEvent : true,
-            fireOnce : false // Keep repeating event while key is pressed?
+            fireOnce : false, // Keep repeating event while key is pressed?
+            type: 'keydown';
         },options || {});
         this.letter = letter;
 
@@ -58,10 +59,10 @@ var HotKey = Class.create({
         this.handler();
     },
     enable: function(){
-        this.element.observe('keydown',this.handler);
+        this.element.observe(this.options.type ,this.handler);
     },
     disable: function(){
-        this.element.stopObserving('keydown',this.handler);
+        this.element.stopObserving(this.options.type ,this.handler);
     },
     destroy: function(){
         this.disable();
